@@ -14,6 +14,8 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
+import Info from "./Info";
+
 export default function SGPAForm() {
     const form = useForm({
         resolver: zodResolver(sgpaFormSchema),
@@ -58,6 +60,8 @@ export default function SGPAForm() {
             >
                 Calculate SGPA
             </Button>
+
+            <Info />
         </form>
     );
 }
