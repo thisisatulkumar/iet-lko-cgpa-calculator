@@ -1,9 +1,12 @@
 "use client";
 
+import { useState } from "react";
+
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import Info from "./Info";
+import SGPADialog from "./SGPADialog";
 
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -18,7 +21,10 @@ import { SUBJECTS } from "@/core/constants/subjects";
 
 import { calculateSGPA } from "@/utils/calculateSGPA";
 
-export default function SGPAForm() {
+const SGPAForm = () => {
+    const [sgpa, setSgpa] = useState<number>(0);
+    const [open, setOpen] = useState<boolean>(false);
+    
     const form = useForm({
         resolver: zodResolver(sgpaFormSchema),
         defaultValues: {},
@@ -29,8 +35,13 @@ export default function SGPAForm() {
     const onSubmit = (data: SGPAFormValues) => {
         const sgpa = calculateSGPA(data);
 
-        alert(`Your SGPA is ${sgpa}`);
+        setSgpa(Number(sgpa));
+        setOpen(true);
     };
+
+    const onOpenChange = () => {
+        setOpen(false);
+    }
 
     return (
         <form 
@@ -68,6 +79,14 @@ export default function SGPAForm() {
 
             {/* Info Text */}
             <Info />
+
+            <SGPADialog 
+                sgpa={sgpa}
+                open={open}
+                onOpenChange={onOpenChange}
+            />
         </form>
     );
 }
+
+export default SGPAForm
