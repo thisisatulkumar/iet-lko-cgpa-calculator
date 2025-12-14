@@ -15,7 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 export default function SGPAForm() {
-    const form = useForm<SGPAFormValues>({
+    const form = useForm({
         resolver: zodResolver(sgpaFormSchema),
         defaultValues: {},
     });
@@ -24,7 +24,7 @@ export default function SGPAForm() {
 
     const onSubmit = (data: SGPAFormValues) => {
         const sgpa = calculateSGPA(data);
-        
+
         alert(`Your SGPA is ${sgpa}`);
     };
 
