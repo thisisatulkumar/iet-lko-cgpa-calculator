@@ -35,7 +35,7 @@ export default function SGPAForm() {
                     key={subject.name}
                 >
                     <Label className="block font-medium mb-1">
-                        {subject.name} ({subject.credits} credits)
+                        {subject.name} ({subject.credits} {subject.credits > 1 ? 'credits' : 'credit'})
                     </Label>
 
                     <Input
