@@ -3,18 +3,20 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { SUBJECTS } from "@/core/constants/subjects";
-import {
-    sgpaFormSchema,
-    SGPAFormValues,
-} from "@/core/schemas/sgpa.schema";
-import { calculateSGPA } from "@/utils/calculateSGPA";
+import Info from "./Info";
 
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-import Info from "./Info";
+import {
+    sgpaFormSchema,
+    SGPAFormValues,
+} from "@/core/schemas/sgpa.schema";
+
+import { SUBJECTS } from "@/core/constants/subjects";
+
+import { calculateSGPA } from "@/utils/calculateSGPA";
 
 export default function SGPAForm() {
     const form = useForm({
@@ -31,11 +33,13 @@ export default function SGPAForm() {
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 w-[100vw] md:w-[50vw] p-8">
+        <form 
+            onSubmit={handleSubmit(onSubmit)} 
+            className="space-y-4 w-screen md:w-[50vw] p-8"
+        >
+            {/* Labels and Inputs */}
             {SUBJECTS.map((subject) => (
-                <div 
-                    key={subject.name}
-                >
+                <div key={subject.name}>
                     <Label className="block font-medium mb-1">
                         {subject.name} ({subject.credits} {subject.credits > 1 ? 'credits' : 'credit'})
                     </Label>
@@ -54,6 +58,7 @@ export default function SGPAForm() {
                 </div>
             ))}
 
+            {/* Submit Button */}
             <Button
                 type="submit"
                 className="cursor-pointer"
@@ -61,6 +66,7 @@ export default function SGPAForm() {
                 Calculate SGPA
             </Button>
 
+            {/* Info Text */}
             <Info />
         </form>
     );
