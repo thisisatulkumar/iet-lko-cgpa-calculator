@@ -29,7 +29,7 @@ export default function SGPAForm() {
     };
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 w-[85vw] md:w-[50vw] p-8">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 w-[100vw] md:w-[50vw] p-8">
             {SUBJECTS.map((subject) => (
                 <div 
                     key={subject.name}
