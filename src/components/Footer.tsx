@@ -4,6 +4,7 @@ const Footer = () => {
     return (
         <footer className="mt-8 w-full border-t">
             <div className="mx-auto max-w-5xl px-4 py-6 text-center text-sm text-muted-foreground space-y-2">
+                {/* Developer Name */}
                 <p>
                     Made out of boredom by{" "}
                     <Link
@@ -15,6 +16,7 @@ const Footer = () => {
                     </Link>
                 </p>
 
+                {/* Source Code */}
                 <p>
                     <Link
                         href="https://github.com/thisisatulkumar/iet-lko-cgpa-calculator"

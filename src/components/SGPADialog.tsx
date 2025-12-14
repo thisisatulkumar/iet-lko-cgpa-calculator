@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
     Dialog,
     DialogClose,
@@ -7,7 +7,7 @@ import {
     DialogFooter,
     DialogHeader,
     DialogTitle,
-} from "@/components/ui/dialog"
+} from "@/components/ui/dialog";
 
 interface SGPADialogProps {
     sgpa: number;
@@ -15,13 +15,19 @@ interface SGPADialogProps {
     onOpenChange: () => void;
 }
 
-const SGPADialog = ({ sgpa, open, onOpenChange }: SGPADialogProps) => {
+const SGPADialog = ({ 
+    sgpa, 
+    open, 
+    onOpenChange 
+}: SGPADialogProps) => {
     return (
         <Dialog 
             open={open}
             onOpenChange={onOpenChange}
         >
             <DialogContent className="sm:max-w-md">
+
+                {/* Dialog Header */}
                 <DialogHeader>
                     <DialogTitle>Your SGPA</DialogTitle>
                     <DialogDescription>
@@ -29,13 +35,18 @@ const SGPADialog = ({ sgpa, open, onOpenChange }: SGPADialogProps) => {
                     </DialogDescription>
                 </DialogHeader>
 
+                {/* Calculated SGPA */}
                 <div className="rounded-lg border bg-muted px-6 py-4 text-center">
                     <h1 className="text-5xl font-bold">{sgpa}</h1>
                 </div>
 
+                {/* Done Button - Closes the dialog box */}
                 <DialogFooter className="sm:justify-start">
                     <DialogClose asChild>
-                        <Button type="button" variant="secondary">
+                        <Button 
+                            type="button" 
+                            variant="secondary"
+                        >
                             Done
                         </Button>
                     </DialogClose>
@@ -45,4 +56,4 @@ const SGPADialog = ({ sgpa, open, onOpenChange }: SGPADialogProps) => {
     )
 }
 
-export default SGPADialog
+export default SGPADialog;

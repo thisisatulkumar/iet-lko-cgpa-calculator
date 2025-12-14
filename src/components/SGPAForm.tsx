@@ -22,8 +22,8 @@ import { SUBJECTS } from "@/core/constants/subjects";
 import { calculateSGPA } from "@/utils/calculateSGPA";
 
 const SGPAForm = () => {
-    const [sgpa, setSgpa] = useState<number>(0);
-    const [open, setOpen] = useState<boolean>(false);
+    const [sgpa, setSgpa] = useState<number>(0);        // Calculated SGPA
+    const [open, setOpen] = useState<boolean>(false);   // SGPA Dialog Box
     
     const form = useForm({
         resolver: zodResolver(sgpaFormSchema),
@@ -32,13 +32,16 @@ const SGPAForm = () => {
 
     const { register, handleSubmit, formState } = form;
 
+    // Function: Handles form submission
     const onSubmit = (data: SGPAFormValues) => {
         const sgpa = calculateSGPA(data);
-
         setSgpa(Number(sgpa));
+
+        // Show the dialog box
         setOpen(true);
     };
 
+    // Function: When someone tries to close the dialog box, set the 'open' state to 'false'
     const onOpenChange = () => {
         setOpen(false);
     }
@@ -51,16 +54,24 @@ const SGPAForm = () => {
             {/* Labels and Inputs */}
             {SUBJECTS.map((subject) => (
                 <div key={subject.name}>
-                    <Label className="block font-medium mb-1">
+
+                    {/* Label */}
+                    <Label 
+                        className="block font-medium mb-1"
+                        htmlFor={subject.name}
+                    >
                         {subject.name} ({subject.credits} {subject.credits > 1 ? 'credits' : 'credit'})
                     </Label>
 
+                    {/* Input */}
                     <Input
+                        id={subject.name}
                         type="number"
                         {...register(subject.name)}
                         className="border p-2 w-full"
                     />
 
+                    {/* Error container - shows up only when a validation error occurs */}
                     {formState.errors[subject.name] && (
                         <p className="text-red-500 text-sm">
                             {formState.errors[subject.name]?.message}
@@ -79,7 +90,8 @@ const SGPAForm = () => {
 
             {/* Info Text */}
             <Info />
-
+            
+            {/* Dialog Box that displays the SGPA */}
             <SGPADialog 
                 sgpa={sgpa}
                 open={open}
@@ -89,4 +101,4 @@ const SGPAForm = () => {
     );
 }
 
-export default SGPAForm
+export default SGPAForm;
