@@ -7,7 +7,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useSequentialFocus } from "@/hooks/useSequentialFocus";
 
-import Info from "./Info";
 import SGPADialog from "./SGPADialog";
 
 import { Label } from "@/components/ui/label";
@@ -109,9 +108,6 @@ const SGPAForm = () => {
             >
                 Calculate SGPA
             </Button>
-
-            {/* Info Text */}
-            <Info />
 
             {/* Dialog Box that displays the SGPA */}
             <SGPADialog
