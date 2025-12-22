@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SGPA Calculator
+A web-based SGPA calculator for IET Lucknow students following AKTU’s grading scheme.
+
+## Problem
+Students calculate SGPA manually and are often confused about the grading scheme and formulae which leads to frequent mistakes and inconsistency.
+
+## Solution
+This application provides a simple form to input your marks in each subject and computes SGPA using AKTU’s official grading logic.
+
+## Features
+- Accurate SGPA Calculation
+- Grading Scheme
+- SGPA Calculation Formula
+- Modern and Responsive UI
+- Input validation for marks
+- Unit-tested core calculation logic
+
+## Tech Stack
+- **Next.js:** React framework for building a fast, production-ready web app.
+- **TypeScript:** Ensures type safety and prevents invalid states.
+- **shadcn/ui:** Accessible and consistent UI components.
+- **Zod + react-hook-form:** Type-safe form validation with minimal re-renders.
+- **Vitest:** Unit testing for core calculation logic.
+- **Vercel:** Deployment and CI/CD platform along with real-time analytics.
 
 ## Getting Started
+### Prerequisties
+- Node.js >= 18
 
-First, run the development server:
-
+### Installation
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/thisisatulkumar/iet-lko-cgpa-calculator.git
+cd iet-lko-cgpa-calculator
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Running Locally
+```
+npm run dev
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Usage
+1. Enter marks for each subject in the input fields.
+2. Grades are automatically mapped according to AKTU’s grading scheme.
+3. SGPA is calculated in real time based on subject credits and grade points.
+4. The final SGPA is displayed in a dialog box.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Example
+![SGPA Calculator – Input Form](./assets/screenshots/form-screenshot.png)
+![SGPA Calculator – SGPA Dialog Box](./assets/screenshots/sgpa-dialog-box-screenshot.png)
+![SGPA Calculator - Grading Table with SGPA Formula](./assets/screenshots/grading-table-with-formula-screenshot.png)
 
-## Learn More
+## Testing
+The project includes unit and component tests to ensure correctness of the core grading logic and UI behavior.
 
-To learn more about Next.js, take a look at the following resources:
+- **Pure utility functions** are unit tested to verify grade mapping and SGPA calculation logic, including boundary and invalid input cases.
+- **Form behavior** is tested to ensure inputs behave correctly and results are rendered after user interaction.
+- **Input auto-advance logic** is tested in isolation to validate focus behavior based on user input.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Tests are written using **Vitest** and **@testing-library/react**.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+To run the test suite:
+```bash
+npm run test
+```
 
-## Deploy on Vercel
+## Design Decisions
+- Core SGPA calculation logic is implemented as pure utility functions to keep it deterministic, testable, and independent of the UI.
+- Form state and validation are handled using react-hook-form with Zod schemas to ensure type-safe and predictable user input handling.
+- UI components are built using shadcn/ui to maintain accessibility and visual consistency while retaining full control over styling.
+- Business logic and presentation are separated to make the codebase easier to reason about and maintain.
+- Unit tests are written for both utility functions and critical UI interactions to catch regressions early.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Limitations
+- Only for first-year students
+- No data persistence
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Future Improvements
+- Extend support to multiple academic years and branches.
+- Add multi-semester support to compute cumulative CGPA.
+- Persist user data across sessions using local a backend.
+- Allow configuration of grading schemes for different universities.
+- Improve result visualization with charts or summaries.
+
+## LICENSE
+This project is licensed under the MIT License.
