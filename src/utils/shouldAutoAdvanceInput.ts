@@ -6,5 +6,5 @@ export const shouldAutoAdvanceInput = (value: string): boolean => {
     if (Number.isNaN(num)) return false;
 
     // Auto-advance if two digits are entered and it's not '10', or if '100' is entered
-    return (value.length == 2 && num !== 10) || num === 100;
+    return (value.length == 2 && num !== 10 && num > 0) || num === 100;
 }
