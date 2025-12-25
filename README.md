@@ -78,7 +78,7 @@ npm run test
 ## Future Improvements
 - Extend support to multiple academic years and branches.
 - Add multi-semester support to compute cumulative CGPA.
-- Persist user data across sessions using local a backend.
+- Persist user data across sessions using a backend.
 - Allow configuration of grading schemes for different universities.
 - Improve result visualization with charts or summaries.
 
