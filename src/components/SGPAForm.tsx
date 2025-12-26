@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -18,12 +18,19 @@ import {
     SGPAFormValues,
 } from "@/core/schemas/sgpa.schema";
 
-import { SUBJECTS } from "@/core/constants/subjects";
-
+import { getSubjects } from "@/utils/getSubjects";
 import { calculateSGPA } from "@/utils/calculateSGPA";
 import { shouldAutoAdvanceInput } from "@/utils/shouldAutoAdvanceInput";
 
-const SGPAForm = () => {
+import type { Semester } from "@/types/semester";
+import type { Branch } from "@/types/branch";
+
+interface SGPAFormProps {
+    semester: Semester;
+    branch: Branch;
+}
+
+const SGPAForm = ({ semester, branch }: SGPAFormProps) => {
     const [sgpa, setSgpa] = useState<number>(0);        // Calculated SGPA
     const [open, setOpen] = useState<boolean>(false);   // SGPA Dialog Box
 
@@ -32,13 +39,16 @@ const SGPAForm = () => {
         defaultValues: {},
     });
 
-    const { register, handleSubmit, formState } = form;
+    const { register, handleSubmit, reset, formState } = form;
 
     const { refs, focusNext } = useSequentialFocus();
 
+    // Get subjects based on selected semester and branch
+    const subjects = getSubjects(semester, branch);
+
     // Function: Handles form submission
     const onSubmit = (data: SGPAFormValues) => {
-        const sgpa = calculateSGPA(data);
+        const sgpa = calculateSGPA(data, subjects);
         setSgpa(Number(sgpa));
 
         // Show the dialog box
@@ -50,15 +60,20 @@ const SGPAForm = () => {
         setOpen(false);
     }
 
+    // Reset form fields when semester or branch changes
+    useEffect(() => {
+        reset();    
+    }, [semester, branch, reset]);
+
     return (
         <form
             onSubmit={handleSubmit(onSubmit)}
             className="space-y-4 w-screen md:w-[50vw] p-8"
         >
             {/* Labels and Inputs */}
-            {SUBJECTS.map((subject, index) => {
+            {subjects.length > 0 ? subjects.map((subject, index) => {
                 const { ref, onChange, ...rest } = register(subject.name);
-                
+
                 return (
                     <div key={subject.name}>
 
@@ -99,15 +114,21 @@ const SGPAForm = () => {
                         )}
                     </div>
                 )
-            })}
+            }) : (
+                <p className="text-center text-gray-500">
+                    Coming soon...
+                </p>
+            )}
 
             {/* Submit Button */}
-            <Button
-                type="submit"
-                className="cursor-pointer"
-            >
-                Calculate SGPA
-            </Button>
+            {subjects.length > 0 && (
+                <Button
+                    type="submit"
+                    className="cursor-pointer"
+                >
+                    Calculate SGPA
+                </Button>
+            )}
 
             {/* Dialog Box that displays the SGPA */}
             <SGPADialog

@@ -1,50 +1,110 @@
+'use client';
+
+import { useState } from "react";
+
 import SGPAForm from "@/components/SGPAForm";
 import GradingTable from "@/components/GradingTable";
 import SGPAFormula from "@/components/SGPAFormula";
 
 import {
-    Tabs,
-    TabsContent,
-    TabsList,
-    TabsTrigger,
-} from "@/components/ui/tabs"
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectLabel,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
+
+import { SEMESTERS } from "@/core/constants/semesters";
+import { BRANCHES } from "@/core/constants/branches";
+
+import type { Semester } from "@/types/semester";
+import type { Branch } from "@/types/branch";
 
 const Home = () => {
+    // Retrieve saved semester and branch from localStorage, if any
+    const savedSemester = localStorage.getItem("semester") as Semester || null;
+    const savedBranch = localStorage.getItem("branch") as Branch || null;
+
+    const [semester, setSemester] = useState<Semester>(savedSemester || SEMESTERS[1].value);    // Default to Sem 1
+    const [branch, setBranch] = useState<Branch>(savedBranch || BRANCHES.CE);                   // Default to CE branch
+
+    // Function: Change semester state and save to localStorage
+    const handleSemesterChange = (value: Semester) => {
+        setSemester(value);
+
+        localStorage.setItem("semester", value);
+    }
+
+    // Function: Change branch state and save to localStorage
+    const handleBranchChange = (value: Branch) => {
+        setBranch(value);
+
+        localStorage.setItem("branch", value);
+    }
+    
     return (
         <div className="flex flex-col justify-center items-center">
-            <Tabs 
-                defaultValue="1st-year" 
-                className="w-screen md:w-[50vw] flex flex-col items-center pt-4"
-            >
-                <TabsList>
-                    <TabsTrigger value="1st-year">1st Year</TabsTrigger>
-                    <TabsTrigger value="2nd-year">2nd Year</TabsTrigger>
-                    <TabsTrigger value="3rd-year">3rd Year</TabsTrigger>
-                    <TabsTrigger value="4th-year">4th Year</TabsTrigger>
-                </TabsList>
 
-                <TabsContent value="1st-year">
-                    <SGPAForm />
-                </TabsContent>
+            {/* Select 'semester' and 'branch' */}
+            <div className="flex gap-4 mt-4">
 
-                <TabsContent value="2nd-year">
-                    <p className="mb-2">
-                        Coming soon...
-                    </p>
-                </TabsContent>
+                {/* Semester */}
+                <Select
+                    value={semester}
+                    onValueChange={value => handleSemesterChange(value as Semester)}
+                >
+                    <SelectTrigger className="w-30 sm:w-45">
+                        <SelectValue placeholder="Semester" />
+                    </SelectTrigger>
 
-                <TabsContent value="3rd-year">
-                    <p className="mb-2">
-                        Coming soon...
-                    </p>
-                </TabsContent>
+                    <SelectContent>
+                        <SelectGroup>
+                            <SelectLabel>Semester</SelectLabel>
 
-                <TabsContent value="4th-year">
-                    <p className="mb-2">
-                        Coming soon...
-                    </p>
-                </TabsContent>
-            </Tabs>
+                            {Object.values(SEMESTERS).map(sem => (
+                                <SelectItem 
+                                    key={sem.value} 
+                                    value={sem.value}
+                                >
+                                    {sem.label}
+                                </SelectItem>
+                            ))}
+                        </SelectGroup>
+                    </SelectContent>
+                </Select>
+
+                {/* Branch */}
+                <Select
+                    value={branch}
+                    onValueChange={(value) => handleBranchChange(value as Branch)}
+                >
+                    <SelectTrigger className="w-30 sm:w-45">
+                        <SelectValue placeholder="Branch" />
+                    </SelectTrigger>
+
+                    <SelectContent>
+                        <SelectGroup>
+                            <SelectLabel>Branch</SelectLabel>
+
+                            {Object.values(BRANCHES).map(br => (
+                                <SelectItem
+                                    key={br.value}
+                                    value={br.value}
+                                >
+                                    {br.label}
+                                </SelectItem>
+                            ))}
+                        </SelectGroup>
+                    </SelectContent>
+                </Select>
+            </div>
+
+            <SGPAForm 
+                semester={semester}
+                branch={branch}
+            />
 
             <div className="border rounded-md">
                 <GradingTable />
