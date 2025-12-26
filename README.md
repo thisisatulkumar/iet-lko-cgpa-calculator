@@ -9,6 +9,7 @@ This application provides a simple form to input your marks in each subject and 
 
 ## Features
 - Accurate SGPA Calculation
+- Multi-Semester and Multi-Branch Support
 - Grading Scheme
 - SGPA Calculation Formula
 - Modern and Responsive UI
@@ -76,8 +77,7 @@ npm run test
 - No data persistence
 
 ## Future Improvements
-- Extend support to multiple academic years and branches.
-- Add multi-semester support to compute cumulative CGPA.
+- Computing cumulative CGPA.
 - Persist user data across sessions using a backend.
 - Allow configuration of grading schemes for different universities.
 - Improve result visualization with charts or summaries.
