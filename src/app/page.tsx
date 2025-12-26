@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import SGPAForm from "@/components/SGPAForm";
 import GradingTable from "@/components/GradingTable";
@@ -23,12 +23,17 @@ import type { Semester } from "@/types/semester";
 import type { Branch } from "@/types/branch";
 
 const Home = () => {
-    // Retrieve saved semester and branch from localStorage, if any
-    const savedSemester = localStorage.getItem("semester") as Semester || null;
-    const savedBranch = localStorage.getItem("branch") as Branch || null;
+    const [semester, setSemester] = useState<Semester>(SEMESTERS[1].value);     // Default to Sem 1
+    const [branch, setBranch] = useState<Branch>(BRANCHES.CE.value);            // Default to CE branch
 
-    const [semester, setSemester] = useState<Semester>(savedSemester || SEMESTERS[1].value);    // Default to Sem 1
-    const [branch, setBranch] = useState<Branch>(savedBranch || BRANCHES.CE);                   // Default to CE branch
+    // Retrieve saved semester and branch from localStorage, if any
+    useEffect(() => {
+        const savedSemester = localStorage.getItem("semester") as Semester | null;
+        const savedBranch = localStorage.getItem("branch") as Branch | null;
+
+        if (savedSemester) setSemester(savedSemester);
+        if (savedBranch) setBranch(savedBranch);
+    }, []);
 
     // Function: Change semester state and save to localStorage
     const handleSemesterChange = (value: Semester) => {
