@@ -41,12 +41,14 @@ npm run dev
 ```
 
 ## Usage
-1. Enter marks for each subject in the input fields.
-2. Grades are automatically mapped according to AKTU’s grading scheme.
-3. SGPA is calculated in real time based on subject credits and grade points.
-4. The final SGPA is displayed in a dialog box.
+1. Select your semester and branch.
+2. Enter marks for each subject in the input fields.
+3. Grades are automatically mapped according to AKTU’s grading scheme.
+4. SGPA is calculated in real time based on subject credits and grade points.
+5. The final SGPA is displayed in a dialog box.
 
 ### Example
+![SGPA Calculator – Select Semester and Branch](./assets/screenshots/semester-branch-select.png)
 ![SGPA Calculator – Input Form](./assets/screenshots/form-screenshot.png)
 ![SGPA Calculator – SGPA Dialog Box](./assets/screenshots/sgpa-dialog-box-screenshot.png)
 ![SGPA Calculator - Grading Table with SGPA Formula](./assets/screenshots/grading-table-with-formula-screenshot.png)
