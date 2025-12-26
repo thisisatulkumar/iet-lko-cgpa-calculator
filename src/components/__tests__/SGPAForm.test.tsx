@@ -5,7 +5,12 @@ import SGPAForm from '../SGPAForm';
 
 describe("SGPAForm UI", () => {
     it("allows user to calculate SGPA", async () => {
-        render(<SGPAForm />);
+        render(
+            <SGPAForm 
+                semester="1"
+                branch="cse-r"
+            />
+        );
 
         fireEvent.change(screen.getByLabelText(/Maths/i), {
             target: { value: "9" },
