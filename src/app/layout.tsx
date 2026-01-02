@@ -10,9 +10,12 @@ import { Analytics } from "@vercel/analytics/next"
 
 import Script from "next/script";
 
+import SWRegister from "./sw-register";
+
 export const metadata: Metadata = {
     title: "SGPA Calculator",
     description: "A handy SGPA calculator for IET Lucknow students",
+    manifest: "/manifest.json",
 };
 
 export default function RootLayout({
@@ -45,6 +48,9 @@ export default function RootLayout({
             <body>
                 {/* Google Analytics */}
                 <GoogleAnalytics />
+
+                {/* Service Worker Registration */}
+                <SWRegister />
                 
                 <Navbar />
                 {children}
