@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.1.0
+- Added Progressive Web App (PWA) support.
+- App can now be installed on desktop and mobile devices.
+- Offline usage supported after first load.
+
 ## v2.0.0
 - Multi-semester and multi-branch support added. Users can now select their semester and branch and calculate SGPA.
 

@@ -12,6 +12,7 @@ This application provides a simple form to input your marks in each subject and 
 - Multi-Semester and Multi-Branch Support
 - Grading Scheme
 - SGPA Calculation Formula
+- Progressive Web App (PWA) support
 - Modern and Responsive UI
 - Input validation for marks
 - Unit-tested core calculation logic
