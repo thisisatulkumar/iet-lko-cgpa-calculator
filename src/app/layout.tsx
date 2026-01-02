@@ -15,7 +15,7 @@ import SWRegister from "./sw-register";
 export const metadata: Metadata = {
     title: "SGPA Calculator",
     description: "A handy SGPA calculator for IET Lucknow students",
-    manifest: "/manifest.json",
+    manifest: "/pwa/manifest.json",
 };
 
 export default function RootLayout({
