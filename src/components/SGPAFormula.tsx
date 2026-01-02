@@ -6,7 +6,7 @@ const SGPAFormula = () => {
             <div className="flex justify-center">
                 <Image
                     src="/sgpa-formula.png"
-                    alt="Σ (Credits x Grade Point) / Total Credits"
+                    alt="SGPA = Σ(Credits x Grade Point) / Total Credits"
                     width={400}
                     height={150}
                     unoptimized={true}
