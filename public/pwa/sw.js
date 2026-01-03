@@ -28,17 +28,26 @@ self.addEventListener("activate", (event) => {
 
 // On fetch, serve from network first, fallback to cache if offline; update cache in background
 self.addEventListener("fetch", (event) => {
+    if (event.request.method !== "GET") return;
+
+    const url = new URL(event.request.url);
+    if (url.origin !== self.location.origin) return;
+
     event.respondWith(
         fetch(event.request)
-            .then(response => {
-                const responseClone = response.clone();         // Cache the updated response
+            .then((response) => {
+                if (!response || response.status !== 200) {
+                    return response;
+                }
 
-                caches.open(CACHE_NAME).then(cache => {
-                    cache.put(event.request, responseClone);    // Save to cache
+                const responseClone = response.clone();
+
+                caches.open(CACHE_NAME).then((cache) => {
+                    cache.put(event.request, responseClone);
                 });
 
-                return response;                                // Return the original to browser
+                return response;
             })
-            .catch(() => caches.match(event.request)) // Fallback to cache if offline
+            .catch(() => caches.match(event.request))
     );
 });
