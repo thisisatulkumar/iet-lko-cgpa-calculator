@@ -8,7 +8,7 @@ const Footer = () => {
                 <p>
                     Made out of boredom by{" "}
                     <Link
-                        href="https://github.com/thisisatulkumar"
+                        href="https://www.linkedin.com/in/thisisatulkumar/"
                         target="_blank"
                         className="font-medium underline underline-offset-4 hover:text-foreground transition"
                     >
