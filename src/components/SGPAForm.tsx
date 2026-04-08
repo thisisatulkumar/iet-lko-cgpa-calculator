@@ -31,8 +31,8 @@ interface SGPAFormProps {
 }
 
 const SGPAForm = ({ semester, branch }: SGPAFormProps) => {
-    const [sgpa, setSgpa] = useState<number>(0);        // Calculated SGPA
-    const [open, setOpen] = useState<boolean>(false);   // SGPA Dialog Box
+    const [sgpa, setSgpa] = useState<number>(0);
+    const [open, setOpen] = useState<boolean>(false);
 
     const form = useForm({
         resolver: zodResolver(sgpaFormSchema),
@@ -43,24 +43,19 @@ const SGPAForm = ({ semester, branch }: SGPAFormProps) => {
 
     const { refs, focusNext } = useSequentialFocus();
 
-    // Get subjects based on selected semester and branch
     const subjects = getSubjects(semester, branch);
 
-    // Function: Handles form submission
     const onSubmit = (data: SGPAFormValues) => {
         const sgpa = calculateSGPA(data, subjects);
         setSgpa(Number(sgpa));
 
-        // Show the dialog box
         setOpen(true);
     };
 
-    // Function: When someone tries to close the dialog box, set the 'open' state to 'false'
     const onOpenChange = () => {
         setOpen(false);
     }
 
-    // Reset form fields when semester or branch changes
     useEffect(() => {
         reset();    
     }, [semester, branch, reset]);
@@ -70,14 +65,11 @@ const SGPAForm = ({ semester, branch }: SGPAFormProps) => {
             onSubmit={handleSubmit(onSubmit)}
             className="space-y-4 w-screen md:w-[50vw] p-8"
         >
-            {/* Labels and Inputs */}
             {subjects.length > 0 ? subjects.map((subject, index) => {
                 const { ref, onChange, ...rest } = register(subject.name);
 
                 return (
                     <div key={subject.name}>
-
-                        {/* Label */}
                         <Label
                             className="block font-medium mb-1"
                             htmlFor={subject.name}
@@ -85,7 +77,6 @@ const SGPAForm = ({ semester, branch }: SGPAFormProps) => {
                             {subject.name} ({subject.credits} {subject.credits > 1 ? 'credits' : 'credit'})
                         </Label>
 
-                        {/* Input */}
                         <Input
                             id={subject.name}
                             type="number"
@@ -106,7 +97,6 @@ const SGPAForm = ({ semester, branch }: SGPAFormProps) => {
                             }}
                         />
 
-                        {/* Error container - shows up only when a validation error occurs */}
                         {formState.errors[subject.name] && (
                             <p className="text-red-500 text-sm">
                                 {formState.errors[subject.name]?.message}
@@ -120,7 +110,6 @@ const SGPAForm = ({ semester, branch }: SGPAFormProps) => {
                 </p>
             )}
 
-            {/* Submit Button */}
             {subjects.length > 0 && (
                 <Button
                     type="submit"
@@ -130,7 +119,6 @@ const SGPAForm = ({ semester, branch }: SGPAFormProps) => {
                 </Button>
             )}
 
-            {/* Dialog Box that displays the SGPA */}
             <SGPADialog
                 sgpa={sgpa}
                 open={open}

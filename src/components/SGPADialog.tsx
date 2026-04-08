@@ -26,8 +26,6 @@ const SGPADialog = ({
             onOpenChange={onOpenChange}
         >
             <DialogContent className="sm:max-w-md">
-
-                {/* Dialog Header */}
                 <DialogHeader>
                     <DialogTitle>Your SGPA</DialogTitle>
                     <DialogDescription>
@@ -35,12 +33,10 @@ const SGPADialog = ({
                     </DialogDescription>
                 </DialogHeader>
 
-                {/* Calculated SGPA */}
                 <div className="rounded-lg border bg-muted px-6 py-4 text-center">
                     <h1 className="text-5xl font-bold">{sgpa}</h1>
                 </div>
 
-                {/* Done Button - Closes the dialog box */}
                 <DialogFooter className="sm:justify-start">
                     <DialogClose asChild>
                         <Button 
