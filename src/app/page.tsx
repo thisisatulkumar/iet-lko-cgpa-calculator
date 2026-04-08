@@ -23,10 +23,9 @@ import type { Semester } from "@/types/semester";
 import type { Branch } from "@/types/branch";
 
 const Home = () => {
-    const [semester, setSemester] = useState<Semester>(SEMESTERS[1].value);     // Default to Sem 1
-    const [branch, setBranch] = useState<Branch>(BRANCHES.CE.value);            // Default to CE branch
+    const [semester, setSemester] = useState<Semester>(SEMESTERS[1].value);
+    const [branch, setBranch] = useState<Branch>(BRANCHES.CE.value);
 
-    // Retrieve saved semester and branch from localStorage, if any
     useEffect(() => {
         const savedSemester = localStorage.getItem("semester") as Semester | null;
         const savedBranch = localStorage.getItem("branch") as Branch | null;
@@ -35,14 +34,12 @@ const Home = () => {
         if (savedBranch) setBranch(savedBranch);
     }, []);
 
-    // Function: Change semester state and save to localStorage
     const handleSemesterChange = (value: Semester) => {
         setSemester(value);
 
         localStorage.setItem("semester", value);
     }
 
-    // Function: Change branch state and save to localStorage
     const handleBranchChange = (value: Branch) => {
         setBranch(value);
 
@@ -51,11 +48,7 @@ const Home = () => {
     
     return (
         <div className="flex flex-col justify-center items-center">
-
-            {/* Select 'semester' and 'branch' */}
             <div className="flex gap-4 mt-4">
-
-                {/* Semester */}
                 <Select
                     value={semester}
                     onValueChange={value => handleSemesterChange(value as Semester)}
@@ -80,7 +73,6 @@ const Home = () => {
                     </SelectContent>
                 </Select>
 
-                {/* Branch */}
                 <Select
                     value={branch}
                     onValueChange={(value) => handleBranchChange(value as Branch)}
