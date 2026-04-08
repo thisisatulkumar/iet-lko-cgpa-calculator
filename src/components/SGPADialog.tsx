@@ -29,7 +29,7 @@ const SGPADialog = ({
                 <DialogHeader>
                     <DialogTitle>Your SGPA</DialogTitle>
                     <DialogDescription>
-                        Calculations follow AKTU's grading scheme; results may vary.
+                        Calculations follow AKTU&apos;s grading scheme; results may vary.
                     </DialogDescription>
                 </DialogHeader>
 
